@@ -105,6 +105,7 @@ DEPENDENCIES
   activerecord
   bcrypt
   capybara
+  nokogiri
   pry
   rack-test
   rake
