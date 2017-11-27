@@ -1,7 +1,7 @@
 class CoinController < ApplicationController
 
   get '/coins/new' do
-    
+    @coin = Scraper.new.get_coin_values.find(params[:coin])
   end
 
   get '/coins/:id' do
