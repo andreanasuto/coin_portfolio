@@ -1,6 +1,7 @@
 class CoinController < ApplicationController
 
   get '/coins/new' do
+    
   end
 
   get '/coins/:id' do
