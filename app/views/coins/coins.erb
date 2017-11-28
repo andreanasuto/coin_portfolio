@@ -1,0 +1,3 @@
+<% @coins.each { |coin| %>
+<li><%= "#{coin.quantity * Scraper.new.get_coin_value(coin.slug).to_f} #{coin.name}"%></li>
+<% } %>
