@@ -1,6 +1,6 @@
 <form action="/coins" method="post">
-  <input type="number" name="quantity" placeholder="0.2">
-  <input list="coins" name="coin" placeholder="Bitcoin">
+  <input type="float" name="quantity" placeholder="0.2">
+  <input list="coins" name="name" placeholder="Bitcoin">
   <datalist id="coins">
     <% @coins.each{ |coin| %>
     <option value="<%= coin %>">

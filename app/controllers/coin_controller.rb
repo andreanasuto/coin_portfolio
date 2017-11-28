@@ -5,7 +5,13 @@ class CoinController < ApplicationController
     erb :"coins/new"
   end
 
+  post '/coins' do
+    @coin = Coin.create(name: params[:name], quantity: params[:quantity])
+    redirect :"/coins/#{@coin.id}"
+  end
+
   get '/coins/:id' do
+    @coin = Coin.find(params[:id])
     erb :"coins/show"
   end
 
