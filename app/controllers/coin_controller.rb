@@ -7,15 +7,15 @@ class CoinController < ApplicationController
 
   post '/coins' do
     @coin = Coin.create(name: params[:name], quantity: params[:quantity])
-    redirect :"/coins/#{@coin.id}"
+    redirect :"/coins/#{@coin.slug}"
   end
 
-  get '/coins/:id' do
-    @coin = Coin.find(params[:id])
+  get '/coins/:slug' do
+    @coin = Coin.find_by_slug(params[:slug])
     erb :"coins/show"
   end
 
-  get '/coins/:id/edit' do
+  get '/coins/:slug/edit' do
     erb :"coins/edit"
   end
 end
