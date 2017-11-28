@@ -1,7 +1,7 @@
 class CoinController < ApplicationController
 
   get '/coins/new' do
-    @coins = Coin.all
+    @coins = Scraper.new.get_coin_names
     erb :"coins/new"
   end
 

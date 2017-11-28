@@ -14,6 +14,10 @@ class Scraper
   def get_coin_values
     get_page.css(".price").collect {|element| element.attribute('data-usd').value }
   end
+
+  def get_coin_value(slug)
+    get_page.css("#id-#{slug} .price").attribute('data-usd').value
+  end
 end
 #Scraper.new.get_page
 #binding.pry

@@ -1,4 +1,7 @@
 require './config/environment'
+require 'nokogiri'
+require 'open-uri'
+require 'pry'
 
 class ApplicationController < Sinatra::Base
   register Sinatra::ActiveRecordExtension
@@ -18,5 +21,6 @@ class ApplicationController < Sinatra::Base
     def current_user
       User.find(session[:user_id])
     end
+    
   end
 end

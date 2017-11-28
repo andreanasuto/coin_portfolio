@@ -1,9 +1,10 @@
-<form action="/action_page.php" method="get">
-  <input list="browsers" name="browser">
-  <datalist id="browsers">
+<form action="/coins" method="post">
+  <input type="number" name="quantity" placeholder="0.2">
+  <input list="coins" name="coin" placeholder="Bitcoin">
+  <datalist id="coins">
     <% @coins.each{ |coin| %>
     <option value="<%= coin %>">
     <% } %>
   </datalist>
-  <input type="submit">
+  <input type="submit" value="Add Coin">
 </form>
