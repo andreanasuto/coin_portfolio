@@ -16,6 +16,12 @@ class CoinController < ApplicationController
   end
 
   get '/coins/:slug/edit' do
+    @coin = Coin.find_by_slug(params[:slug])
     erb :"coins/edit"
+  end
+
+  post '/coins/:slug' do
+    @coin = Coin.find_by_slug(params[:slug])
+    @coin.update(quantity: params[:quantity])
   end
 end

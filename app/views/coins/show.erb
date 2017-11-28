@@ -1,1 +1,3 @@
-<%= @coin.name %>
+<%= "#{@coin.quantity} #{@coin.name} "%>
+<br>
+<%= "$" + "#{@coin.quantity * Scraper.new.get_coin_value(params[:slug]).to_f}" %>
