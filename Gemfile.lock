@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/bmabey/database_cleaner.git
+  revision: db928d229ef14486fd55f2fd42227d2412566702
+  specs:
+    database_cleaner (1.6.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -105,6 +111,7 @@ DEPENDENCIES
   activerecord
   bcrypt
   capybara
+  database_cleaner!
   nokogiri
   pry
   rack-test

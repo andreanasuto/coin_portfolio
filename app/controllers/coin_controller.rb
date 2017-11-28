@@ -1,7 +1,8 @@
 class CoinController < ApplicationController
 
   get '/coins/new' do
-    @coins = ["Tizio", "Pippo", "Gianicolo"]
+    @coins = Coin.all
+    erb :"coins/new"
   end
 
   get '/coins/:id' do
