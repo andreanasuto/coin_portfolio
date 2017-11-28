@@ -15,8 +15,9 @@ class CoinController < ApplicationController
   end
 
   post '/coins' do
-    @coin = Coin.find_or_create_by(name: params[:name])
-    @coin.update(quantity: params[:quantity])
+    if !params[:name].empty? && !params[:quantity].empty?
+      @coin = Coin.create(name: params[:name], quantity: params[:quantity])
+    end
     redirect :"/coins/#{@coin.slug}"
   end
 
