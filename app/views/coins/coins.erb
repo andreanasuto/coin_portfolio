@@ -1,8 +1,10 @@
 <h1><%= "$ #{@sum}" %></h1>
 <% @coins.each { |coin| %>
-<li><%= "$ #{coin.quantity * Scraper.new.get_coin_value(coin.slug).to_f} #{coin.name}"%>
+<li><%= "$ #{coin.to_dollar.round(3)} #{coin.name}"%>
     <form action="/coins/<%= coin.slug %>/edit">
       <input type="submit" value="Edit" />
     </form>
 </li>
 <% } %>
+
+<!--coin.quantity * Scraper.new.get_coin_value(coin.slug).to_f.round(3)-->

@@ -5,7 +5,7 @@ class CoinController < ApplicationController
       @coins = Coin.where(user_id: current_user.id)
       @sum = 0
       @coins.each { |coin|
-        @sum += coin.quantity * Scraper.new.get_coin_value(coin.slug).to_f
+        @sum += coin.to_dollar.round(2)
       }
       erb :"/coins/coins"
     else
@@ -50,7 +50,11 @@ class CoinController < ApplicationController
 
   post '/coins/:slug' do
     @coin = Coin.find_by_slug(params[:slug])
-    @coin.update(quantity: params[:quantity])
-    redirect :"/coins/#{@coin.slug}"
+    if params[:quantity].to_f >= 0
+      @coin.update(quantity: params[:quantity])
+      redirect :"/coins/#{@coin.slug}"
+    else
+      "Sorry bro, you can't store a negative value of a coin!"
+    end
   end
 end
