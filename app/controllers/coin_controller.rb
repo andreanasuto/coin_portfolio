@@ -14,12 +14,12 @@ class CoinController < ApplicationController
   end
 
   get '/coins/new' do
-    #if logged_in?
+    if logged_in?
       @coins = Scraper.new.get_coin_names
       erb :"coins/new"
-    #else
-      #redirect :"/login"
-    #end
+    else
+      redirect :"/login"
+    end
   end
 
   post '/coins' do
@@ -31,21 +31,21 @@ class CoinController < ApplicationController
   end
 
   get '/coins/:slug' do
-    #if logged_in?
+    if logged_in?
       @coin = Coin.find_by_slug(params[:slug])
       erb :"coins/show"
-    #else
-      #redirect :"/login"
-    #end
+    else
+      redirect :"/login"
+    end
   end
 
   get '/coins/:slug/edit' do
-    #if logged_in?
+    if logged_in?
       @coin = Coin.find_by_slug(params[:slug])
       erb :"coins/edit"
-    #else
-      #redirect :"/login"
-    #end
+    else
+      redirect :"/login"
+    end
   end
 
   post '/coins/:slug' do

@@ -11,7 +11,11 @@ class ApplicationController < Sinatra::Base
   enable :sessions
 
   get '/' do
-    erb :index
+    if logged_in?
+      redirect "/coins"
+    else
+      erb :index
+    end
   end
 
   helpers do
