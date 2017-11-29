@@ -1,14 +1,21 @@
+<label>Hi! This is the current value of your portfolio:</label>
 <h1><%= "$ #{@sum}" %></h1>
+<label>Your portfolio composition:</label>
 <% @coins.each { |coin| %>
 <ol><%= "$ #{coin.to_dollar.round(3)} #{coin.name}"%>
     <br></br>
     <form action="/coins/<%= coin.slug %>/edit">
-      <input type="submit" value="I've bought or sold some coins"/>
+      <input type="submit" value="I've bought or sold some <%= coin.name %>"/>
     </form>
     <form action="/coins/<%= coin.slug %>/delete" method="post">
       <input type="hidden" name="_method" value="delete">
       <input type="submit" value="I've sold them all!"/>
     </form>
     <br></br>
-</ol>
-<% } %>
+    </ol>
+    <% } %>
+<label> Do you own other coins?</label>
+<br></br>
+<form action="/coins/new">
+  <input type="submit" value="Add more coins"/>
+</form>

@@ -24,7 +24,9 @@ class CoinController < ApplicationController
 
   post '/coins' do
     if !params[:name].empty? && !params[:quantity].empty?
-      @coin = Coin.create(name: params[:name], quantity: params[:quantity])
+      @coin = Coin.find_or_create_by(name: params[:name])
+      @coin.quantity = 0
+      @coin.quantity += params[:quantity].to_f
       current_user.coins << @coin
     end
     redirect :"/coins"
