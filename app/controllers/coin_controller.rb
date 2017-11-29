@@ -57,4 +57,16 @@ class CoinController < ApplicationController
       "Sorry bro, you can't store a negative value of a coin!"
     end
   end
+
+  delete '/coins/:slug/delete' do
+    if logged_in?
+      @coin = Coin.find_by_slug(params[:slug])
+      if current_user.coins.include?(@coin)
+        @coin.delete
+      end
+      redirect :"/coins"
+    else
+      redirect :"/login"
+    end
+  end
 end
