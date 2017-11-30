@@ -25,8 +25,12 @@ class CoinController < ApplicationController
   post '/coins' do
     if !params[:name].empty? && !params[:quantity].empty?
       @coin = Coin.find_or_create_by(name: params[:name])
-      @coin.quantity = 0
-      @coin.quantity += params[:quantity].to_f
+      if @coin.quantity
+        @coin.quantity += params[:quantity].to_f
+      else
+        @coin.quantity = 0
+        @coin.quantity += params[:quantity].to_f
+      end
       current_user.coins << @coin
     end
     redirect :"/coins"
@@ -48,6 +52,21 @@ class CoinController < ApplicationController
     else
       redirect :"/login"
     end
+  end
+
+  put '/coins/subtract' do
+    if !params[:name].empty? && !params[:quantity].empty?
+      @coin = current_user.coins.find_by(name: params[:name])
+      if @coin.quantity >= params[:quantity].to_f
+        @coin.quantity -= params[:quantity].to_f
+        @coin.save
+        redirect :"/coins"
+      else
+        "I'm sorry, I cannot remove coins that you don't own"
+        redirect :"/coins"
+      end
+    end
+
   end
 
   post '/coins/:slug' do
