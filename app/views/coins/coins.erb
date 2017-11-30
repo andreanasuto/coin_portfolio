@@ -4,12 +4,8 @@
 <label>Your portfolio composition:</label>
 
 <% @coins.each { |coin| %>
-<ol><%= "$ #{coin.to_dollar.round(3)} #{coin.name}"%>
+<ol><%= "$ #{coin.to_dollar.round(3)}"%> <a href="/coins/<%= coin.slug %>"><%= coin.name %></a>
     <br></br>
-
-    <form action="/coins/<%= coin.slug %>/edit">
-      <input type="submit" value="I've bought or sold some <%= coin.name %>"/>
-    </form>
 
     <form action="/coins" method="post">
       <input type="float" name="quantity" placeholder="0.2">

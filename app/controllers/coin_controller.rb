@@ -63,7 +63,6 @@ class CoinController < ApplicationController
         redirect :"/coins"
       else
         "I'm sorry, I cannot remove coins that you don't own"
-        redirect :"/coins"
       end
     end
 
