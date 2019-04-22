@@ -1,6 +1,13 @@
 <label>Hi! This is the current value of your portfolio:</label>
 <h1><%= "$ #{@sum}" %></h1>
 
+<br>
+<label> Do you own other coins?</label>
+<form action="/coins/new">
+  <input type="submit" value="Add more coins"/>
+</form>
+<br>
+
 <label>Your portfolio composition:</label>
 
 <% @coins.each { |coin| %>
@@ -32,9 +39,3 @@
     <br></br>
     </ol>
     <% } %>
-
-<label> Do you own other coins?</label>
-
-<form action="/coins/new">
-  <input type="submit" value="Add more coins"/>
-</form>
