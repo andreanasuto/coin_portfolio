@@ -3,6 +3,7 @@ An easy way to know how much money is worth your investments.
 A no-frills portfolio tracker for cryptocurrencies.
 This project has been developed using Ruby, Sinatra and Nokogiri gem to scrape data.
 
+
 # Why
 ## Back in 2011
 I first heard about Bitcoin in 2011 during a discussion with a bunch of friends studying finance as me. For the following years, I’ve never touched or thought about buying bitcoins until I came across another discussion, similar set up (a bunch of friends sitting at one table) but different location, the US instead of Italy. This time I did my research.
@@ -28,3 +29,25 @@ After creating a simple login/signup page, using the findings from the user rese
 On top the current total value of the portfolio, below the compositions of the portfolio with cryptocurrencies you have been investing in and an immediate call to action to add a coin and its quantity to the portfolio. In this way, you can add or remove coins without going on another page. Surprisingly, this works like AJAX solution without AJAX (plus: I didn't know about AJAX while I was creating this!).
 In order to add a coin you can choose from a pre-filled list of coins. These names come from the web scraping on Coinmarketcap. No duplicates or manual entry is possible so I've avoided having problems while matching the coin entry with its price information coming from the scraping.
 The information for each coin (like its price, value in bitcoin and so forth) is reduced to two: price and quantity. However, you can still visit a single coin page and perform a similar action while seeing more information.
+
+### Installing
+
+First, clone this repo through your terminal:
+
+```
+git clone
+```
+
+Secondly, run migrations:
+
+```
+rake db:migrate
+```
+
+The repo uses 'shotgun' gem to run locally. Just type:
+
+```
+shotgun
+```
+You'll see running on your browser the app.
+Enjoy!
