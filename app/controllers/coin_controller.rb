@@ -24,7 +24,7 @@ class CoinController < ApplicationController
 
   post '/coins' do
     if !params[:name].empty? && !params[:quantity].empty?
-      @coin = Coin.find_or_create_by(name: params[:name])
+      @coin = current_user.coins.find_or_create_by(name: params[:name])
       if @coin.quantity
         @coin.quantity += params[:quantity].to_f
       else
@@ -37,26 +37,26 @@ class CoinController < ApplicationController
   end
 
   get '/coins/:slug' do
-    if logged_in?
-      @coin = Coin.find_by_slug(params[:slug])
-      erb :"coins/show"
+    @coin = current_user.coins.find_by_slug(params[:slug])
+    if logged_in? && @coin
+        erb :"coins/show"
     else
-      redirect :"/login"
+        redirect :"/coins"
     end
   end
 
   get '/coins/:slug/edit' do
-    if logged_in?
-      @coin = Coin.find_by_slug(params[:slug])
+    @coin = current_user.coins.find_by_slug(params[:slug])
+    if logged_in? && @coin
       erb :"coins/edit"
     else
-      redirect :"/login"
+      redirect :"/coins"
     end
   end
 
   put '/coins/subtract' do
-    if !params[:name].empty? && !params[:quantity].empty?
-      @coin = current_user.coins.find_by(name: params[:name])
+    @coin = current_user.coins.find_by(name: params[:name])
+    if @coin && !params[:name].empty? && !params[:quantity].empty?.is_a?(Integer)
       if @coin.quantity >= params[:quantity].to_f
         @coin.quantity -= params[:quantity].to_f
         @coin.save
@@ -64,29 +64,29 @@ class CoinController < ApplicationController
       else
         "I'm sorry, I cannot remove coins that you don't own"
       end
+    else
+      redirect '/coins'
+    end
     end
 
   end
 
-  post '/coins/:slug' do
-    @coin = Coin.find_by_slug(params[:slug])
+  put '/coins/:slug' do
+    @coin = current_user.coins.find_by_slug(params[:slug])
     if params[:quantity].to_f >= 0
       @coin.update(quantity: params[:quantity])
       redirect :"/coins/#{@coin.slug}"
     else
-      "Sorry bro, you can't store a negative value of a coin!"
+      "Sorry, you can't store a negative value of a coin!"
     end
   end
 
   delete '/coins/:slug/delete' do
-    if logged_in?
-      @coin = Coin.find_by_slug(params[:slug])
-      if current_user.coins.include?(@coin)
+    @coin = current_user.coins.find_by_slug(params[:slug])
+    if logged_in? && @coin
         @coin.delete
-      end
-      redirect :"/coins"
     else
-      redirect :"/login"
+      redirect :"/coins"
     end
   end
 end
