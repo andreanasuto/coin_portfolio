@@ -22,5 +22,3 @@ class Scraper
     get_page.css("#id-#{slug} .price").attribute('data-usd').value
   end
 end
-#Scraper.new.get_page
-#binding.pry
