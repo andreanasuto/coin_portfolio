@@ -14,7 +14,7 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       redirect "/coins"
     else
-      erb :index
+      redirect "/signup"
     end
   end
 
