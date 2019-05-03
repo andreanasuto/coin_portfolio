@@ -67,8 +67,6 @@ class CoinController < ApplicationController
     else
       redirect '/coins'
     end
-    end
-
   end
 
   put '/coins/:slug' do
