@@ -10,12 +10,16 @@ class UserController < ApplicationController
 
   post '/signup' do
     @user = User.new(:name => params[:name], :email => params[:email] ,:password => params[:password])
-    if !params[:name].empty? && !params[:email].empty? && !params[:password].empty?
-      @user.save
-      session[:user_id] = @user.id
-      redirect :"/coins"
+    if User.find_by(email: params[:email])
+      redirect :'/login'
     else
-      redirect :"/signup"
+      if !params[:name].empty? && !params[:email].empty? && !params[:password].empty?
+        @user.save
+        session[:user_id] = @user.id
+        redirect :"/coins"
+      else
+        redirect :"/signup"
+      end
     end
   end
 
