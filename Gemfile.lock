@@ -88,6 +88,8 @@ GEM
     sinatra-activerecord (2.0.13)
       activerecord (>= 3.2)
       sinatra (>= 1.0)
+    sinatra-flash (0.3.0)
+      sinatra (>= 1.0.0)
     sinatra-twitter-bootstrap (2.3.4)
     sqlite3 (1.4.0)
     thin (1.7.2)
@@ -123,10 +125,11 @@ DEPENDENCIES
   shotgun
   sinatra (~> 2.0.1)
   sinatra-activerecord
+  sinatra-flash
   sinatra-twitter-bootstrap
   sqlite3
   thin
   tux
 
 BUNDLED WITH
-   1.16.1
+   1.17.3
