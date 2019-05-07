@@ -9,13 +9,11 @@ class UserController < ApplicationController
   end
 
   post '/signup' do
-    if !params[:name].empty? && !params[:email].empty? && !params[:password].empty?
-      @user = User.where(:email => params[:email]).first_or_create do |user|
-        session[:user_id] = @user.id
-        user.name = params[:name]
-        user.email = params[:email]
-        user.password = params[:password]
-      end
+    @user = User.find_by(email: params[:email])
+    if @user
+      redirect :'/login'
+    elsif !params[:name].empty? && !params[:email].empty? && !params[:password].empty?
+      @user = User.create(name: params[:name], email: params[:email], password: params[:password])
       redirect :"/coins"
     else
       redirect :"/signup"
@@ -31,12 +29,12 @@ class UserController < ApplicationController
   end
 
   post '/login' do
-    if @user = User.find_by(email: params[:email])
-      @user.authenticate(params[:password])
+    @user = User.find_by(email: params[:email])
+    if @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect :'/coins'
     else
-      redirect '/signup'
+      redirect '/login'
     end
   end
 
