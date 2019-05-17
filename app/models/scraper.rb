@@ -5,9 +5,21 @@ class Scraper
 
   def get_coin_names
     names = get_page.css(".currency-name-container").collect {|element| element.text }
-    names.map! { |coin| coin == 'Basic Attenti...' ? 'Basic Attention Token' : coin  }
-    names.map! { |coin| coin == 'Raiden Networ...' ? 'Raiden Network Token' : coin  }
-    names.map! { |coin| coin == 'Santiment Net...' ? 'Santiment' : coin  }
+
+    names.map! do |coin|
+      case coin
+      when 'Basic Attenti...'
+        'Basic Attention Token'
+      when 'Raiden Networ...'
+        'Raiden Network Token'
+      when 'XRP'
+        'Ripple'
+      when 'Santiment Net...'
+        'Santiment'
+      else
+        coin
+      end
+    end
   end
 
   def get_coin_values
