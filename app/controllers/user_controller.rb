@@ -27,7 +27,6 @@ class UserController < ApplicationController
     if logged_in?
       redirect :"/coins"
     else
-      binding.pry
       erb :'/users/login'
     end
   end
