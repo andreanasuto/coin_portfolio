@@ -3,25 +3,21 @@ class CoinController < ApplicationController
   use Rack::Flash
 
   get '/coins' do
-    if logged_in?
-      @coins = Coin.where(user_id: current_user.id)
-      @sum = 0
-      @coins.each do |coin|
-        @sum += coin.to_dollar.round(2)
-      end
-      erb :"/coins/coins"
-    else
-     redirect :"/login"
+
+  redirect_if_not_loggedin
+    @coins = current_user.coins
+    @sum = 0
+    @coins.each do |coin|
+      @sum += coin.to_dollar.round(2)
     end
+    erb :"/coins/coins"
   end
 
   get '/coins/new' do
-    if logged_in?
+    redirect_if_not_loggedin
       @coins = Scraper.new.get_coin_names
       erb :"coins/new"
-    else
       redirect :"/login"
-    end
   end
 
   post '/coins' do
@@ -58,7 +54,7 @@ class CoinController < ApplicationController
 
   put '/coins/subtract' do
     @coin = current_user.coins.find_by(name: params[:name])
-    if @coin && !params[:name].empty? && !params[:quantity].empty?.is_a?(Integer)
+    if @coin && !params[:name].empty? && !params[:quantity].empty? && params[:quantity].is_a?(Integer)
       if @coin.quantity >= params[:quantity].to_f
         @coin.quantity -= params[:quantity].to_f
         @coin.save
