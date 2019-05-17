@@ -1,11 +1,22 @@
-<label for="new_user">Create New User</label>
-<br></br>
-<form action="/signup" method="post">
-  <label>Name</label> <br>
-  <input type="text" name="name"><br>
-  <label>Email</label> <br>
-  <input type="text" name="email"><br>
-  <label>Password</label> <br>
-  <input type="password" name="password"><br>
-  <input type="submit" name="Create New User">
-</form>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <body>
+    <% if flash.has?(:error) %>
+      <div id="success" style="border: 2px solid red; text-align: center">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
+
+    <label for="new_user">Create New User</label>
+    <br></br>
+    <form action="/signup" method="post">
+      <label>Name</label> <br>
+      <input type="text" name="name"><br>
+      <label>Email</label> <br>
+      <input type="text" name="email"><br>
+      <label>Password</label> <br>
+      <input type="password" name="password"><br>
+      <input type="submit" name="Create New User">
+    </form>
+  </body>
+</html>

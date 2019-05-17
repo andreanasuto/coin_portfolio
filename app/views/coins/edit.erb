@@ -1,7 +1,22 @@
-<label>Edit the quantity of coins that you own:</label>
-<br></br>
-<form action="/coins/<%= @coin.slug %>" method="post">
-  <input id="hidden" type="hidden" name="_method" value="put">
-  <input type="float" name="quantity" value="<%= @coin.quantity %>">
-  <input type="submit" value="Edit">
-</form>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <% if flash.has?(:error) %>
+      <div id="error" style="border: 2px solid red;text-align: center">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
+    
+    <label>Edit the quantity of coins that you own:</label>
+    <br></br>
+    <form action="/coins/<%= @coin.slug %>" method="post">
+      <input id="hidden" type="hidden" name="_method" value="put">
+      <input type="float" name="quantity" value="<%= @coin.quantity %>">
+      <input type="submit" value="Edit">
+    </form>
+  </body>
+</html>

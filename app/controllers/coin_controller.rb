@@ -1,12 +1,14 @@
 class CoinController < ApplicationController
+  enable :sessions
+  use Rack::Flash
 
   get '/coins' do
     if logged_in?
       @coins = Coin.where(user_id: current_user.id)
       @sum = 0
-      @coins.each { |coin|
+      @coins.each do |coin|
         @sum += coin.to_dollar.round(2)
-      }
+      end
       erb :"/coins/coins"
     else
      redirect :"/login"
@@ -62,7 +64,8 @@ class CoinController < ApplicationController
         @coin.save
         redirect :"/coins"
       else
-        "I'm sorry, I cannot remove coins that you don't own"
+        flash[:error] = "I'm sorry, I cannot remove coins that you don't own"
+        redirect :"/coins"
       end
     else
       redirect '/coins'
@@ -75,7 +78,8 @@ class CoinController < ApplicationController
       @coin.update(quantity: params[:quantity])
       redirect :"/coins/#{@coin.slug}"
     else
-      "Sorry, you can't store a negative value of a coin!"
+      flash[:error] = "Sorry, you can't store a negative value of a coin!"
+      redirect :"/coins/#{@coin.slug}"
     end
   end
 

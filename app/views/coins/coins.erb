@@ -1,41 +1,52 @@
-<label>Hi! This is the current value of your portfolio:</label>
-<h1><%= "$ #{@sum}" %></h1>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+  <body>
+    <% if flash.has?(:error) %>
+      <div id="error" style="border: 2px solid red;text-align: center">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
 
-<br>
-<label> Do you own other coins?</label>
-<form action="/coins/new">
-  <input type="submit" value="Add more coins"/>
-</form>
-<br>
-
-<label>Your portfolio composition:</label>
-
-<% @coins.each { |coin| %>
-<ol><%= "$ #{coin.to_dollar.round(3)}"%> <a href="/coins/<%= coin.slug %>"><%= coin.name %></a>
-    <br></br>
-
-    <form action="/coins" method="post">
-      <input type="float" name="quantity" placeholder="0.2">
-      <input type= "hidden" name="name" value="<%= coin.name %>" >
-      <input type="text" name="name" value="<%= coin.name %>" /disabled>
-      <input type="submit" value="Add Coin">
+    <label>Hi! This is the current value of your portfolio:</label>
+    <h1><%= "$ #{@sum}" %></h1>
+    <br>
+    <label> Do you own other coins?</label>
+    <form action="/coins/new">
+      <input type="submit" value="Add more coins"/>
     </form>
+    <br>
 
-    <form action="/coins/subtract" method="post">
-      <input type="float" name="quantity" placeholder="0.2">
-      <input type="hidden" name="_method" value="put">
-      <input type= "hidden" name="name" value="<%= coin.name %>" >
-      <input type="text" name="name" value="<%= coin.name %>" /disabled>
-      <input type="submit" value="Remove Coin">
-    </form>
+    <label>Your portfolio composition:</label>
 
-    <form action="/coins/<%= coin.slug %>/delete" method="post">
-      <input type="hidden" name="_method" value="delete">
-      <input type="submit" value="I've sold them all!"/>
-    </form>
+    <% @coins.each { |coin| %>
+    <ol><%= "$ #{coin.to_dollar.round(3)}"%> <a href="/coins/<%= coin.slug %>"><%= coin.name %></a>
+        <br></br>
 
-    <br></br>
-    </ol>
-    <% } %>
+        <form action="/coins" method="post">
+          <input type="float" name="quantity" placeholder="0.2">
+          <input type= "hidden" name="name" value="<%= coin.name %>" >
+          <input type="text" name="name" value="<%= coin.name %>" /disabled>
+          <input type="submit" value="Add Coin">
+        </form>
 
-  <a href="/logout"> Log Out </a>
+        <form action="/coins/subtract" method="post">
+          <input type="float" name="quantity" placeholder="0.2">
+          <input type="hidden" name="_method" value="put">
+          <input type= "hidden" name="name" value="<%= coin.name %>" >
+          <input type="text" name="name" value="<%= coin.name %>" /disabled>
+          <input type="submit" value="Remove Coin">
+        </form>
+
+        <form action="/coins/<%= coin.slug %>/delete" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="I've sold them all!"/>
+        </form>
+
+        <br></br>
+        </ol>
+        <% } %>
+
+      <a href="/logout"> Log Out </a>
+  </body>
+</html>

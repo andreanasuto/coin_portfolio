@@ -50,6 +50,8 @@ GEM
       method_source (~> 0.9.0)
     public_suffix (3.0.3)
     rack (2.0.7)
+    rack-flash3 (1.0.5)
+      rack
     rack-protection (2.0.5)
       rack
     rack-test (1.1.0)
@@ -88,8 +90,6 @@ GEM
     sinatra-activerecord (2.0.13)
       activerecord (>= 3.2)
       sinatra (>= 1.0)
-    sinatra-flash (0.3.0)
-      sinatra (>= 1.0.0)
     sinatra-twitter-bootstrap (2.3.4)
     sqlite3 (1.4.0)
     thin (1.7.2)
@@ -118,6 +118,7 @@ DEPENDENCIES
   database_cleaner!
   nokogiri
   pry
+  rack-flash3
   rack-test
   rake
   require_all
@@ -125,7 +126,6 @@ DEPENDENCIES
   shotgun
   sinatra (~> 2.0.1)
   sinatra-activerecord
-  sinatra-flash
   sinatra-twitter-bootstrap
   sqlite3
   thin

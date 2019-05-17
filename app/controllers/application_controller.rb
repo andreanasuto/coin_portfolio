@@ -2,14 +2,15 @@ require './config/environment'
 require 'nokogiri'
 require 'open-uri'
 require 'pry'
+require 'rack-flash'
+
 
 class ApplicationController < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   register Sinatra::Twitter::Bootstrap::Assets
   set :session_secret, "my_application_secret"
   set :views, 'app/views'
-  enable :sessions
-
+  
   get '/' do
     if logged_in?
       redirect "/coins"

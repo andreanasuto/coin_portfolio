@@ -1,9 +1,20 @@
-<h1><label>Login</label></h1>
-<br></br>
-<form action="/login" method="post">
-  <p>Your email:</p><input type="text" name="email"><br>
-  <p>Your password:</p><input type="password" name="password"><br></br>
-  <input type="submit" value="Login">
-</form>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <body>
+    <% if flash.has?(:error) %>
+      <div id="error" style="border: 2px solid red; text-align: center">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
 
-<p> New user? <a href='/signup'>Sign Up!</a></p>
+    <h1><label>Login</label></h1>
+    <br></br>
+    <form action="/login" method="post">
+      <p>Your email:</p><input type="text" name="email"><br>
+      <p>Your password:</p><input type="password" name="password"><br></br>
+      <input type="submit" value="Login">
+    </form>
+
+    <p> New user? <a href='/signup'>Sign Up!</a></p>
+  </body>
+</html>

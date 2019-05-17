@@ -16,7 +16,7 @@ gem 'sinatra-twitter-bootstrap', :require => 'sinatra/twitter-bootstrap'
 gem 'capybara'
 gem 'require_all'
 gem 'nokogiri'
-gem 'sinatra-flash'
+gem 'rack-flash3'
 
 group :test do
   gem 'rspec'

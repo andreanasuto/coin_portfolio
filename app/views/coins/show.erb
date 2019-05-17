@@ -1,14 +1,30 @@
-<label> You own:</label>
-<h2><%= "#{@coin.quantity} #{@coin.name} "%></h2>
-<br>
-<label>With a value of:</label><h1><%= "$" + "#{@coin.to_dollar}" %></h1>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <% if flash.has?(:error) %>
+      <div id="error" style="border: 2px solid red;text-align: center">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
 
-<form action="/coins/<%= @coin.slug %>/edit">
-  <input type="submit" value="I've bought or sold some <%= @coin.name %>"/>
-</form>
-<form action="/coins/<%= @coin.slug %>/delete" method="post">
-  <input type="hidden" name="_method" value="delete">
-  <input type="submit" value="I've sold them all!"/>
-</form>
-<br></br>
-<a href="/coins">Go back to your portfolio</a>
+    <label> You own:</label>
+    <h2><%= "#{@coin.quantity} #{@coin.name} "%></h2>
+    <br>
+    <label>With a value of:</label><h1><%= "$" + "#{@coin.to_dollar}" %></h1>
+
+    <form action="/coins/<%= @coin.slug %>/edit">
+      <input type="submit" value="I've bought or sold some <%= @coin.name %>"/>
+    </form>
+    <form action="/coins/<%= @coin.slug %>/delete" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="I've sold them all!"/>
+    </form>
+    <br></br>
+    <a href="/coins">Go back to your portfolio</a>
+
+  </body>
+</html>
